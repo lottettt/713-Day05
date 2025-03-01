@@ -5,7 +5,11 @@ import exp from "constants";
 const router = express.Router();
 
 router.get("/", async(req, res) => {
-    if (req.query.category) {
+    if (req.query.pageSize && req.query.pageNo) {
+    const pageSize = parseInt(req.query.pageSize as string);
+    const pageNo = parseInt(req.query.pageNo as string);
+    res.json(await service.getAllEventsWithPagination(pageSize, pageNo));
+    } else if (req.query.category) {
     const category = req.query.category;
     const filteredEvents = await service.getEventByCategory(category as string);
     res.json(filteredEvents);
