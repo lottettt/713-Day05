@@ -28,7 +28,9 @@ router.get("/", async(req, res) => {
                 return;
             }
     }
-            
+    finally {
+        console.log(`Request is completed. with pageNo=${pageNo} and pageSize=${pageSize}`);
+    }
 
     } else if (req.query.category) {
         const category = req.query.category;
