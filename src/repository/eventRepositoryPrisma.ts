@@ -69,9 +69,13 @@ export function addEvent(newEvent: Event) {
 
 export async function getAllEventsWithOrganizerPagination(keyword: string, pageSize: number, pageNo: number) {
   const where = {
-    title: { contains: keyword }
+    OR : [
+      { category: { contains: keyword } },
+      { title: { contains: keyword } },
+      { description: { contains: keyword } },
+      { organizer: { name: { contains: keyword } } }
+    ]
   };
-
   const events = await prisma.event.findMany({
     where,
     skip: pageSize * (pageNo - 1),
