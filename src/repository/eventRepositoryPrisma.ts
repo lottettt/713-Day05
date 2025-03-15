@@ -80,10 +80,10 @@ export async function getAllEventsWithOrganizerPagination(keyword: string, pageS
     where,
     skip: pageSize * (pageNo - 1),
     take: pageSize,
-    select: {
-      id: true,
-      category: true,
-      organizerId: false,
+    omit: {
+      organizerId: true
+    },
+    include: {
       organizer: {
         select: {
           name: true

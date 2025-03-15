@@ -5,7 +5,6 @@ import exp from "constants";
 const router = express.Router();
 
 router.get("/", async(req, res) => {
-    if (req.query.pageSize && req.query.pageNo) {
         const pageSize = parseInt(req.query.pageSize as string) || 3;
         const pageNo = parseInt(req.query.pageNo as string) || 1;
         const keyword = req.query.keyword as string;
@@ -32,13 +31,7 @@ router.get("/", async(req, res) => {
         console.log(`Request is completed. with pageNo=${pageNo} and pageSize=${pageSize}`);
     }
 
-    } else if (req.query.category) {
-        const category = req.query.category;
-        const filteredEvents = await service.getEventByCategory(category as string);
-        res.json(filteredEvents);
-    } else {
-        res.json(await service.getAllEvents());
-    }
+    
 });
 
 
